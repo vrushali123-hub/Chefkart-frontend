@@ -7,20 +7,24 @@ const InvestorsCarousel = () => {
       name: 'Deepinder Goyal',
       title: 'Founder & CEO, Zomato',
       description: 'Deepinder Goyal is the founder and CEO of Zomato, one of the largest food tech companies in India. As an investor of Chefkart, Goyal is backing a promising idea to offer authentic and affordable meals prepared in the comfort of one\'s home. His investment is a testament to the potential of Chefkart and its innovative approach to at-home cooking services.',
-      image: 'https://example.com/deepinder-goyal.jpg'
+      image: 'https://thechefkart.com/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fchefkart-strapi-media%2FGoyal_aa638560fb.webp&w=1920&q=75'
     },
     {
-      name: 'Investor 2',
-      title: 'Title 2',
-      description: 'Description 2',
-      image: 'https://example.com/investor2.jpg'
+      name: 'Mukual Singhal ',
+      title: 'CO-founder & Partner at Pravega Venture ',
+      description: 'ChefKart is driven by the idea to digitise an essential service that is largely unorganised. They are the pioneers in streamlining an industry with tremendous untapped market potential.',
+      image: ' https://thechefkart.com/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fchefkart-strapi-media%2FPravega_logo_e65d821b25.webp&w=1920&q=75'
     },
-    {
-      name: 'Investor 3',
-      title: 'Title 3',
-      description: 'Description 3',
-      image: 'https://example.com/investor3.jpg'
-    }
+   
+
+       {
+      name: 'Titan Capita',
+      title: 'Venture Capital Firm',
+      description: 'Titan Capital is known to support exceptional entrepreneurs who aim to make a significant impact on India and the world,ChefKart focus on providing trained verified and professional cooks to busy professionals and families aligns with the firms commitment to investing in businesses that promote positive lifestyle changes',
+      image: 'https://thechefkart.com/_next/image?url=https%3A%2F%2Fstorage.googleapis.com%2Fchefkart-strapi-media%2FTitan_d8b7827ada.webp&w=1920&q=75'
+    },
+    
+
   ];
 
   const handlePrevious = () => {

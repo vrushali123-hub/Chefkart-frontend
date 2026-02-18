@@ -3,15 +3,21 @@ import React from 'react';
 
 const SignupSection = () => {
   return (
-    <section className="text-gray-600 body-font">
-      <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
+
+ <section className="text-gray-600 body-font"
+  style={{ backgroundImage: "url('/image1.png')" ,
+   backgroundSize: "cover" 
+  }}
+ >
+<div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
+
         {/* Left Content */}
         <div className="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0">
           <h1 className="title-font font-medium text-6xl text-gray-900">
           Simplifying the <br/> way <span className='text-orange-400 font-bold text-center underline'> India</span> eats.
           </h1>
-          
         </div>
+
 
         {/* Signup Form */}
         <div className="lg:w-2/6 md:w-1/2 bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">

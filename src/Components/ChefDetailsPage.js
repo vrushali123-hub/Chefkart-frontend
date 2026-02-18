@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-// eslint-disable-next-line no-unused-vars
 import { FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 import { MdAccessTime } from "react-icons/md";
 
@@ -113,5 +112,3 @@ const ChefDetails = () => {
 };
 
 export default ChefDetails;
-
-

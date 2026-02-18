@@ -7,10 +7,6 @@ import Carousel2 from './Slider2'
 
 import Investors from './Recent Copy/components/Feature';
 
-
-
-
-
 const Invest = () => {
   return (
     <div>

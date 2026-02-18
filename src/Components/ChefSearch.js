@@ -1,15 +1,70 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+/* eslint-disable no-unused-vars */
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-const ChefDirectory = () => {
-  //handle the api calls and data fetching for the chef directory
-  //useState to manage the state of chefs and search filters
-  const [chefs, setChefs] = useState([]);
 
-  //search  filter of chef
+const ChefDirectory = () => {
+  const navigate = useNavigate();
+
+  // ✅ Static Chef Data (No Backend)
+  const [chefs] = useState([
+    {
+      _id: "1",
+      name: "Mr. Monu",
+      phone: "+91-76XXXXXXXX",
+      city: "Gurgaon",
+      area: "Sector 53",
+      locality: "DLF Exclusive Floor",
+      experience: 10,
+      starRating: 4.5,
+      totalRatings: 342,
+      profilepic:
+        "https://storage.googleapis.com/chefkartimages/cook-profile/2146-2353-Monu.png",
+    },
+    {
+      _id: "2",
+      name: "Mr. Shankar Prasad",
+      phone: "91-95XXXXXXXX",
+      city: "Gurgaon",
+      area: "Sector 65",
+      locality: "Emerald Premier Floor",
+      experience: 9,
+      starRating: 4.8,
+      totalRatings: 181,
+      profilepic:
+        "https://storage.googleapis.com/chefkartimages/cook-profile/14787-shan.png",
+    },
+
+    {
+      _id: "3",
+      name: " Ms. Sangita Dev",
+      phone: "+91-99XXXXXXXX",
+      city: "Gurgaon",
+      area: "Sector 41, ",
+      locality: "Block C,South city 1, Gurgaon, 3+ locations",
+      experience: 10,
+      starRating: 4.8,
+      totalRatings: 566,
+      profilepic: "https://storage.googleapis.com/chefkartimages/cook-profile/38849-Sangita.png",
+    },
+
+    
+    {
+      _id: "4",
+      name: " Mr.Santosh Ram",
+      phone: "+91-90XXXXXXXX",
+      city: "Gurgaon",
+      area: " Sector 56 ",
+      locality: " HUDA CGHS Housing,7+ locations ",
+      experience: 7,
+      starRating: 4.6,
+      totalRatings: 484,
+      profilepic: "https://storage.googleapis.com/chefkartimages/cook-profile/47770-santosh.png",
+    },
+
+  ]);
+
+  // ✅ Search State
   const [search, setSearch] = useState("");
-  //useNavigate is used to navigate to different routes
-   const navigate = useNavigate();
 
   const [filters, setFilters] = useState({
     city: "",
@@ -17,48 +72,40 @@ const ChefDirectory = () => {
     locality: "",
   });
 
-  useEffect(() => {
-    const fetchChefs = async () => {
-      try {
-        const response = await axios.get("http://localhost:8000/chef/get");
-        if (response.data && response.data.data) {
-
-          setChefs(response.data.data);
-        }
-      } catch (error) {
-        console.error("Error fetching chefs:", error);
-      }
-    };
-
-    fetchChefs();
-  }, []);
-// filter the chefs based on the search input and selected filters
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
     setFilters((prev) => ({ ...prev, [name]: value }));
   };
 
-  
+  // ✅ Filtering Logic Same
   const filteredChefs = chefs.filter((chef) => {
     const matchesGlobalSearch =
       chef.name.toLowerCase().includes(search.toLowerCase()) ||
       chef.phone.includes(search);
+
     const matchesCity =
       filters.city === "" ||
-      chef.city?.toLowerCase().includes(filters.city.toLowerCase());
+      chef.city.toLowerCase().includes(filters.city.toLowerCase());
+
     const matchesArea =
       filters.area === "" ||
-      chef.area?.toLowerCase().includes(filters.area.toLowerCase());
+      chef.area.toLowerCase().includes(filters.area.toLowerCase());
+
     const matchesLocality =
       filters.locality === "" ||
-      chef.Address?.toLowerCase().includes(filters.locality.toLowerCase());
+      chef.locality.toLowerCase().includes(filters.locality.toLowerCase());
 
-    return matchesGlobalSearch && matchesCity && matchesArea && matchesLocality;
+    return (
+      matchesGlobalSearch &&
+      matchesCity &&
+      matchesArea &&
+      matchesLocality
+    );
   });
 
   return (
     <div className="p-4 bg-gray-100 min-h-screen mt-16">
-      {/* Search Filters */}
+      {/* 🔍 Search Filters */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
         <input
           type="text"
@@ -93,36 +140,53 @@ const ChefDirectory = () => {
         />
       </div>
 
-      {/* Chefs List */}
+      {/* 👨‍🍳 Trending Cooks */}
       <h1 className="text-xl font-bold mb-4">Trending cooks</h1>
-      <div className="grid grid-cols-1 mt-5 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredChefs.map((chef, index) => (
+
+      <div className="space-y-6">
+        {filteredChefs.map((chef) => (
           <div
-            key={index}
+            key={chef._id}
+            className="flex items-center bg-white border rounded-xl shadow-sm p-4 hover:shadow-md transition cursor-pointer"
             onClick={() => navigate(`/chef/${chef._id}`)}
-            className="bg-white p-4 rounded-lg shadow hover:shadow-lg transition"
           >
-            <div className="flex items-center space-x-4">
+            {/* Image */}
+            <div className="w-20 h-20 rounded-lg overflow-hidden bg-orange-500 flex-shrink-0">
               <img
-                src={chef.profilepic || "https://via.placeholder.com/64"}
+                src={chef.profilepic}
                 alt={chef.name}
-                className="w-16 h-16 rounded-full object-cover"
+                className="w-full h-full object-cover"
               />
-              <div>
-                <h3 className="text-lg font-semibold">{chef.name}</h3>
-                <p className="text-sm text-gray-500">
-                  {chef.city}, {chef.area}
-                </p>
-              </div>
             </div>
-            <div className="mt-4">
-              <p className="text-sm">
-                ⭐ {chef.starRating || "0"} ({chef.totalRatings || "0"} Ratings)
+
+            {/* Info */}
+            <div className="ml-4 flex-1">
+              <div className="flex items-center justify-between">
+                <h3 className="font-semibold text-gray-800">
+                  {chef.name}
+                </h3>
+
+                <div className="text-sm text-gray-600">
+                  ⭐ {chef.starRating}
+                  <span className="ml-1 text-gray-400">
+                    ({chef.totalRatings} Ratings)
+                  </span>
+                </div>
+              </div>
+
+              <p className="text-sm text-gray-500 mt-1">
+                {chef.locality}, {chef.area}, {chef.city}
               </p>
-              <p className="text-sm">📞 {chef.phone}</p>
-              <p className="text-sm">
-                Experience: {chef.experience || "N/A"}
-              </p>
+
+              <div className="flex items-center text-sm text-gray-600 mt-2 gap-6">
+                <div className="text-green-600">
+                  📞 {chef.phone}
+                </div>
+
+                <div className="text-gray-500">
+                  {chef.experience} Years of Exp
+                </div>
+              </div>
             </div>
           </div>
         ))}
@@ -132,5 +196,3 @@ const ChefDirectory = () => {
 };
 
 export default ChefDirectory;
-
-
