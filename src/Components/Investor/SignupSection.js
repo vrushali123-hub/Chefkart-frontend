@@ -9,6 +9,7 @@ const SignupSection = () => {
    backgroundSize: "cover" 
   }}
  >
+
 <div className="container px-5 py-24 mx-auto flex flex-wrap items-center">
 
         {/* Left Content */}
